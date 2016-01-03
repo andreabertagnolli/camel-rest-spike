@@ -15,6 +15,9 @@ public class RouteTest {
     @Ignore
     @Test
     public void test() {
+        CamelRestSpike main = new CamelRestSpike();
+        main.start();
+
         Response response = ClientBuilder.newClient().target("http://localhost:8080/upload").request().post(Entity.entity("entity", MediaType.TEXT_PLAIN_TYPE));
 
         Assert.assertEquals(200, response.getStatus());
