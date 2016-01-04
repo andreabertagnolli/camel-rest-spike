@@ -2,8 +2,8 @@
 
 This is a little spike for testing Camel rest support.
 
-* unit  tests *
+*unit  tests*  
 mvn clean test
 
-* integration tests *
+*integration tests*  
 mvn clean integration-test
