@@ -12,7 +12,6 @@ import javax.ws.rs.core.Response;
 
 public class RouteTest {
 
-    @Ignore
     @Test
     public void test() {
         CamelRestSpike main = new CamelRestSpike();

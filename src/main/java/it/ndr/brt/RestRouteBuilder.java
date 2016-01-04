@@ -8,7 +8,7 @@ public class RestRouteBuilder extends RouteBuilder {
     private String to;
 
     public RestRouteBuilder() {
-        this("rest:something", "result:something");
+        this("restlet:http://localhost:8080/upload?restletMethod=post", "mock:update");
     }
 
     public RestRouteBuilder(String from, String to) {
