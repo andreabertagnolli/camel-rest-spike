@@ -4,15 +4,15 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.impl.DefaultCamelContext;
 
-public class CamelRestSpike {
+public class RestApplication {
 
     private final CamelContext context;
 
-    public CamelRestSpike() {
+    public RestApplication() {
         this.context = new DefaultCamelContext();
     }
 
-    public CamelRestSpike(CamelContext context) {
+    public RestApplication(CamelContext context) {
         this.context = context;
     }
 

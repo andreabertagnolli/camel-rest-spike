@@ -1,6 +1,7 @@
 package it.ndr.brt;
 
 import org.apache.camel.EndpointInject;
+import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
@@ -20,10 +21,19 @@ public class RestRouteBuilderTest extends CamelTestSupport {
     protected MockEndpoint resultEndpoint;
 
     @Test
-    public void test() throws InterruptedException {
+    public void when_payload_is_valid_returns_ok() throws InterruptedException {
         resultEndpoint.expectedBodiesReceived("OK!");
 
         template.sendBody("Test");
+
+        resultEndpoint.assertIsSatisfied();
+    }
+
+    @Test
+    public void when_payload_is_empty_returns_error() throws InterruptedException {
+        resultEndpoint.expectedHeaderReceived(Exchange.HTTP_RESPONSE_CODE, "422");
+
+        template.sendBody(null);
 
         resultEndpoint.assertIsSatisfied();
     }
