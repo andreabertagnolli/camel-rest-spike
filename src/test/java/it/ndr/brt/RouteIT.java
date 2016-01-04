@@ -10,7 +10,7 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-public class RouteTest {
+public class RouteIT {
 
     @Test
     public void test() {
