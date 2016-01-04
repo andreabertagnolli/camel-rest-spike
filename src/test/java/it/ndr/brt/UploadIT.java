@@ -11,7 +11,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-public class UploadRouteIT {
+public class UploadIT {
 
     private WebTarget target;
 
