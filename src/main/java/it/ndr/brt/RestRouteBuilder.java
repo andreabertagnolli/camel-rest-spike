@@ -8,7 +8,7 @@ public class RestRouteBuilder extends RouteBuilder {
     private String to;
 
     public RestRouteBuilder() {
-        this("restlet:http://localhost:8080/upload?restletMethod=post", "mock:update");
+        this("direct:upload", "mock:update");
     }
 
     public RestRouteBuilder(String from, String to) {
@@ -18,6 +18,11 @@ public class RestRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
+        restConfiguration().component("restlet")
+                .host("localhost").port(8080);
+
+        rest().post("/upload").to(from);
+
         from(from)
         .setBody(simple("OK!"))
         .to(to);
