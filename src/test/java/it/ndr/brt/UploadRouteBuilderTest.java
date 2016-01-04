@@ -9,7 +9,7 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Test;
 
-public class RestRouteBuilderTest extends CamelTestSupport {
+public class UploadRouteBuilderTest extends CamelTestSupport {
 
     public static final String FROM = "direct:start";
     public static final String TO = "mock:result";
@@ -40,6 +40,6 @@ public class RestRouteBuilderTest extends CamelTestSupport {
 
     @Override
     protected RouteBuilder createRouteBuilder() throws Exception {
-        return new RestRouteBuilder(FROM, TO);
+        return new UploadRouteBuilder(FROM, TO);
     }
 }
