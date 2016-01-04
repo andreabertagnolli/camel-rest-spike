@@ -21,10 +21,10 @@ public class RestRouteBuilderTest extends CamelTestSupport {
     protected MockEndpoint resultEndpoint;
 
     @Test
-    public void when_payload_is_valid_returns_ok() throws InterruptedException {
+    public void when_payload_is_valid_xml_returns_ok() throws InterruptedException {
         resultEndpoint.expectedBodiesReceived("OK!");
 
-        template.sendBody("Test");
+        template.sendBody("<test>ok!</test>");
 
         resultEndpoint.assertIsSatisfied();
     }
