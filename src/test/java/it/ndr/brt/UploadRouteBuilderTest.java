@@ -22,9 +22,18 @@ public class UploadRouteBuilderTest extends CamelTestSupport {
 
     @Test
     public void when_payload_is_valid_xml_returns_ok() throws InterruptedException {
-        resultEndpoint.expectedBodiesReceived("OK!");
+        resultEndpoint.expectedHeaderReceived(Exchange.HTTP_RESPONSE_CODE, "200");
 
-        template.sendBody("<test>ok!</test>");
+        template.sendBody("<?xml version=\"1.0\" encoding=\"UTF-8\" ?><test>ok</test>");
+
+        resultEndpoint.assertIsSatisfied();
+    }
+
+    @Test
+    public void when_payload_is_not_a_valid_xml_returns_bad_request() throws InterruptedException {
+        resultEndpoint.expectedHeaderReceived(Exchange.HTTP_RESPONSE_CODE, "422");
+
+        template.sendBody("<test>ok!</test");
 
         resultEndpoint.assertIsSatisfied();
     }

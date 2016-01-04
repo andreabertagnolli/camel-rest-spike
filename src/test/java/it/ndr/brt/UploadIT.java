@@ -33,8 +33,8 @@ public class UploadIT {
     }
 
     @Test
-    public void when_body_is_not_empty_return_200() {
-        Response response = target.request().post(Entity.entity("SOMETHING", MediaType.TEXT_PLAIN_TYPE));
+    public void when_body_is_an_xml_return_200() {
+        Response response = target.request().post(Entity.entity("<?xml version=\"1.0\" encoding=\"UTF-8\" ?><test>SOMETHING</test>", MediaType.TEXT_PLAIN_TYPE));
 
         Assert.assertEquals(200, response.getStatus());
     }

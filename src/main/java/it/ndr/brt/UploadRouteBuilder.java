@@ -23,10 +23,10 @@ public class UploadRouteBuilder extends RouteBuilder {
     public void configure() throws Exception {
         from(from)
         .choice()
-        .when(body().isEqualTo(null))
-            .setHeader(Exchange.HTTP_RESPONSE_CODE, simple("422"))
-        .otherwise()
-            .setBody(simple("OK!"))
+            .when(Predicates.isAValidXML())
+                .setBody(simple("OK!"))
+            .otherwise()
+                .setHeader(Exchange.HTTP_RESPONSE_CODE, simple("422"))
         .to(to);
     }
 
