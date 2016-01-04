@@ -9,7 +9,7 @@ public class RestRouteBuilder extends RouteBuilder {
     private String to;
 
     public RestRouteBuilder() {
-        this("direct:upload", "mock:update");
+        this("direct:upload", "mock:result");
     }
 
     public RestRouteBuilder(String from, String to) {
