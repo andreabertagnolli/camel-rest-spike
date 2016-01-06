@@ -2,3 +2,6 @@
 target/
 untitled.iml
 camel-rest-spike.iml
+.classpath
+.project
+.settings/
