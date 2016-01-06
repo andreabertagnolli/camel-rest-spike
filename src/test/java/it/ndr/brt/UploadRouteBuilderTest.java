@@ -14,6 +14,7 @@ public class UploadRouteBuilderTest extends CamelTestSupport {
 
     public static final String FROM = "direct:start";
     public static final String TO = "mock:result";
+    public static final String DATABASE = "mock:db";
 
     @Produce(uri = FROM)
     protected ProducerTemplate template;
@@ -21,13 +22,18 @@ public class UploadRouteBuilderTest extends CamelTestSupport {
     @EndpointInject(uri = TO)
     protected MockEndpoint resultEndpoint;
 
+    @EndpointInject(uri = DATABASE)
+    protected MockEndpoint databaseEndpoint;
+
     @Test
-    public void when_payload_is_valid_xml_returns_ok() throws InterruptedException {
+    public void when_payload_is_valid_xml_returns_ok_and_write_to_db() throws InterruptedException {
         resultEndpoint.expectedHeaderReceived(HTTP_RESPONSE_CODE, "200");
         resultEndpoint.expectedBodiesReceived("OK!");
+        databaseEndpoint.expectedMessageCount(1);
 
         template.sendBody("<?xml version=\"1.0\" encoding=\"UTF-8\" ?><test>ok</test>");
 
+        databaseEndpoint.assertIsSatisfied();
         resultEndpoint.assertIsSatisfied();
     }
 
@@ -51,6 +57,6 @@ public class UploadRouteBuilderTest extends CamelTestSupport {
 
     @Override
     protected RouteBuilder createRouteBuilder() throws Exception {
-        return new UploadRouteBuilder(FROM, TO);
+        return new UploadRouteBuilder(FROM, TO, DATABASE);
     }
 }
