@@ -1,13 +1,14 @@
 package it.ndr.brt;
 
-import org.apache.camel.Exchange;
-import org.apache.camel.Predicate;
-import org.apache.commons.io.IOUtils;
-import org.w3c.dom.Document;
+import static org.apache.commons.io.IOUtils.toInputStream;
+
+import java.io.InputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.InputStream;
+
+import org.apache.camel.Exchange;
+import org.apache.camel.Predicate;
 
 public class Predicates {
 
@@ -21,7 +22,7 @@ public class Predicates {
                         builder.parse((InputStream)body);
                     }
                     else {
-                        builder.parse(IOUtils.toInputStream(String.valueOf(body)));
+                        builder.parse(toInputStream(String.valueOf(body)));
                     }
                     return true;
                 } catch (Exception e) {

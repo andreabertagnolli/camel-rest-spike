@@ -1,7 +1,8 @@
 package it.ndr.brt;
 
+import static org.apache.camel.Exchange.HTTP_RESPONSE_CODE;
+
 import org.apache.camel.EndpointInject;
-import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
@@ -22,7 +23,8 @@ public class UploadRouteBuilderTest extends CamelTestSupport {
 
     @Test
     public void when_payload_is_valid_xml_returns_ok() throws InterruptedException {
-        resultEndpoint.expectedHeaderReceived(Exchange.HTTP_RESPONSE_CODE, "200");
+        resultEndpoint.expectedHeaderReceived(HTTP_RESPONSE_CODE, "200");
+        resultEndpoint.expectedBodiesReceived("OK!");
 
         template.sendBody("<?xml version=\"1.0\" encoding=\"UTF-8\" ?><test>ok</test>");
 
@@ -31,7 +33,7 @@ public class UploadRouteBuilderTest extends CamelTestSupport {
 
     @Test
     public void when_payload_is_not_a_valid_xml_returns_bad_request() throws InterruptedException {
-        resultEndpoint.expectedHeaderReceived(Exchange.HTTP_RESPONSE_CODE, "422");
+        resultEndpoint.expectedHeaderReceived(HTTP_RESPONSE_CODE, "422");
 
         template.sendBody("<test>ok!</test");
 
@@ -40,7 +42,7 @@ public class UploadRouteBuilderTest extends CamelTestSupport {
 
     @Test
     public void when_payload_is_empty_returns_error() throws InterruptedException {
-        resultEndpoint.expectedHeaderReceived(Exchange.HTTP_RESPONSE_CODE, "422");
+        resultEndpoint.expectedHeaderReceived(HTTP_RESPONSE_CODE, "422");
 
         template.sendBody(null);
 
