@@ -2,8 +2,11 @@
 
 This is a little spike for testing Camel rest support.
 
-*unit  tests*  
-mvn clean test
+Run container with
+``` docker-compose up ```
 
-*integration tests*  
-mvn clean integration-test
+Try to do a request to 
+``` POST http:localhost:8080/upload ```
+
+When you put a valid XML into body you get a 200 with "OK!" body
+When you put everything else into body you get a 422

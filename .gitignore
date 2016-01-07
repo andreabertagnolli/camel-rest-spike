@@ -5,3 +5,4 @@ camel-rest-spike.iml
 .classpath
 .project
 .settings/
+dependency-reduced-pom.xml
